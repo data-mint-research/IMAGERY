@@ -5,17 +5,36 @@ logs/
 # Environment variables
 .env
 
-# Data directories (optional, depending on whether you want to track these)
+# Data directories (MinIO buckets, MariaDB)
 data/images/
 data/videos/
 data/staging/
+data/minio/
+data/db/
 
 # OS specific files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
 
-# IDE specific files
+# Editor and IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# Python cache (in case of future MCP scripting)
+__pycache__/
+*.pyc
+.venv/
+
+# Backup or temp files
+*~
+*.bak
+*.tmp
+*.autosave.yaml
+
+# Mounts or network shares
+mnt/
