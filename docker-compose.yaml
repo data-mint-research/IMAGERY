@@ -1,7 +1,54 @@
-# MinIO Zugangsdaten (alle Buckets gemeinsam)
-MINIO_ROOT_USER=minio
-MINIO_ROOT_PASSWORD=minio123
+version: "3.9"
 
-# MariaDB Zugangsdaten
-MARIADB_ROOT_PASSWORD=example
-MARIADB_DATABASE=digikam
+services:
+
+  mariadb:
+    container_name: mcp_host_MARIADB
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MARIADB_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+
+  minio-staging:
+    container_name: mcp_host_MINIO_STAGING
+    image: quay.io/minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9001:9000"
+    volumes:
+      - ./data/staging:/data
+    restart: unless-stopped
+
+  minio-images:
+    container_name: mcp_host_MINIO_IMAGES
+    image: quay.io/minio/minio:latest
+    command: server /data --console-address ":9002"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9002:9000"
+    volumes:
+      - ./data/images:/data
+    restart: unless-stopped
+
+  minio-videos:
+    container_name: mcp_host_MINIO_VIDEOS
+    image: quay.io/minio/minio:latest
+    command: server /data --console-address ":9003"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9003:9000"
+    volumes:
+      - ./data/videos:/data
+    restart: unless-stopped
