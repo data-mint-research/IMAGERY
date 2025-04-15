@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
 
   mariadb:
@@ -12,10 +14,10 @@ services:
     volumes:
       - ./data/db:/var/lib/mysql
 
-  minio-staging:
-    container_name: mcp_host_MINIO_STAGING
+  minio-main:
+    container_name: mcp_host_MINIO
     image: quay.io/minio/minio:latest
-    command: server /data --console-address "0.0.0.0:9001"
+    command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
@@ -23,31 +25,5 @@ services:
       - "9000:9000"
       - "9001:9001"
     volumes:
-      - ./data/staging:/data
-    restart: unless-stopped
-
-  minio-images:
-    container_name: mcp_host_MINIO_IMAGES
-    image: quay.io/minio/minio:latest
-    command: server /data --console-address "0.0.0.0:9002"
-    environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-    ports:
-      - "9002:9002"
-    volumes:
-      - ./data/images:/data
-    restart: unless-stopped
-
-  minio-videos:
-    container_name: mcp_host_MINIO_VIDEOS
-    image: quay.io/minio/minio:latest
-    command: server /data --console-address "0.0.0.0:9003"
-    environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-    ports:
-      - "9003:9003"
-    volumes:
-      - ./data/videos:/data
+      - ./data/minio:/data
     restart: unless-stopped

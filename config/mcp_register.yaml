@@ -1,0 +1,21 @@
+mcp_units:
+  - name: MARIADB
+    role: metadata
+    host: localhost
+    port: 3306
+
+  - name: MINIO_STAGING
+    role: storage
+    host: localhost
+    port: 9000
+    ui: http://localhost:9001
+
+  - name: MINIO_IMAGES
+    role: storage
+    host: localhost
+    port: 9002
+
+  - name: MINIO_VIDEOS
+    role: storage
+    host: localhost
+    port: 9003
