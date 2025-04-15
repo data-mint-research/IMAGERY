@@ -1,0 +1,7 @@
+# MinIO Zugangsdaten (alle Buckets gemeinsam)
+MINIO_ROOT_USER=minio
+MINIO_ROOT_PASSWORD=minio123
+
+# MariaDB Zugangsdaten
+MARIADB_ROOT_PASSWORD=example
+MARIADB_DATABASE=digikam

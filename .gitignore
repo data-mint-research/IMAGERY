@@ -1,0 +1,21 @@
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# Data directories (optional, depending on whether you want to track these)
+data/images/
+data/videos/
+data/staging/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
